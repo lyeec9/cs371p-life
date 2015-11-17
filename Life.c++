@@ -20,20 +20,33 @@
 using namespace std;
 
 // -------------
-// Cell Methods
+// AbstractCell Methods
 // -------------
+
 ostream& operator << (ostream& o, AbstractCell& cell){
 	return o;
 }
 
-void ConwayCell::update(Life<AbstractCell>& life, int row, int col, int width, int height){
+// -------------
+// ConwayCell Methods
+// -------------
+
+void ConwayCell::update(vector<AbstractCell*> neighbors, int row, int col, int width, int height){
 
 }
 
-void FredkinCell::update(Life<AbstractCell>& life, int row, int col, int width, int height){
+// -------------
+// FredkinCell Methods
+// -------------
+
+void FredkinCell::update(vector<AbstractCell*> neighbors, int row, int col, int width, int height){
 	
 }
 
-void Cell::update(Life<AbstractCell>& life, int row, int col, int width, int height){
+// -------------
+// Cell Methods
+// -------------
+
+void Cell::update(vector<AbstractCell*> neighbors, int row, int col, int width, int height){
 	
 }
