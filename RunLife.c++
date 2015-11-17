@@ -28,6 +28,12 @@ int main () {
     	getline(cin,line);
     	int outputFreq = stoi(line);
 
+        cout << "cell type \"" + cellType + "\""<<endl;
+        cout << "compare with fredkin cell" + to_string(cellType.compare("FredkinCell") ) << endl;
+        cout << "rows" + to_string(rows) <<endl;
+        cout << "cols" + to_string(cols) <<endl;
+        cout << "steps" + to_string(steps) <<endl;
+        cout << "outputFreq" + to_string(outputFreq) <<endl;
     	/*fix scope problem
     	if(strcmp(cellType, "FredkinCell"))
     		Life<FredkinCell> life(cols, rows);
@@ -47,7 +53,7 @@ int main () {
 
 		*/
 
-    	if(cellType.compare( "FredkinCell")){
+    	if(cellType.compare( "FredkinCell") == 0){
     		Life<FredkinCell> life(cols, rows);
     		for(int r = 0; r < rows; r++){
     			getline(cin, line);
@@ -57,15 +63,15 @@ int main () {
 				}
     		}
     		for(int i = 0; i < steps; i++){
+                if(i%outputFreq == 0){
+                    cout << life <<endl;
+                }
     			life.step();
-    			if(i%outputFreq == 0){
-    				cout << life <<endl;
-    			}
     		}
     	}
-    	else if(cellType.compare( "ConwayCell")){
-    		Life<ConwayCell> life(cols, rows);
-    		for(int r = 0; r < rows; r++){
+    	else if(cellType.compare( "ConwayCell")  == 0){
+            Life<ConwayCell> life(cols, rows);
+            for(int r = 0; r < rows; r++){
     			getline(cin, line);
     			for(int c = 0; c < cols; c++){
     				ConwayCell cell(line.at(c));
@@ -73,10 +79,14 @@ int main () {
 				}
     		}
     		for(int i = 0; i < steps; i++){
+
+                //I swapped the order of print and step for correctness
+                //However, if you leave step here without the print, step still breaks
+                //on the first iteration. 
+                if(i%outputFreq == 0){
+                    cout << life <<endl;
+                }
     			life.step();
-    			if(i%outputFreq == 0){
-    				cout << life <<endl;
-    			}
     		}
     	}
     	else{
@@ -89,10 +99,10 @@ int main () {
 				}
     		}
     		for(int i = 0; i < steps; i++){
+                if(i%outputFreq == 0){
+                    cout << life <<endl;
+                }
     			life.step();
-    			if(i%outputFreq == 0){
-    				cout << life <<endl;
-    			}
     		}
     	}
     	getline(cin, line);
