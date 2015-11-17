@@ -1,12 +1,20 @@
+/* @file RunDarwin.c++
+ * @brief The file that simulates the 4 desired boards
+ */
 
-
-#include <iostream> // cin, cout
+#include <cassert>   // assert
+#include <cstdlib>   // rand, srand
+#include <iostream>  // cout, endl
+#include <stdexcept> // invalid_argument, out_of_range
 
 #include "Life.h"
 
-// main 
+
+// ----
+// main
+// ----
 
 int main () {
     using namespace std;
-    life_solve(cin, cout); /** Voting_solve() defined in Voting.c++ is called with cin, cout as arguments */
-    return 0;}
+}
+
