@@ -33,17 +33,20 @@ class Life {
 	public:
 
 		Life(int w, int h): width(w), height(h){
-			
+
 		}
+
 		void addCell(T cell){
 			cells.push_back(cell);
-			world.push_back(&(cells.back()));
-			//The following line works for some odd reason.
-			//So the print is fine, but it's not detecting the right type of object when we try to print it out
-			//using cout <<life <<endl;
-
-			//cout << *(world.back()); 
+			if(cells.size()==height*width){
+				for(int r = 0; r < height; ++r){
+					for(int c = 0; c < width; c++){
+						world.push_back(&cells[r*width + c]);
+					}
+				}
+			}
 		}
+
 		void step(){
 			for(int r = 0; r < height; ++r){
 				for(int c = 0; c < width; c++){
@@ -61,7 +64,6 @@ class Life {
 							}
 						}
 					}
-					cout << at(r,c) <<endl;
 					at(r,c)->update(neighbors, r, c, width, height);
 				}
 			}
@@ -78,7 +80,7 @@ class Life {
 		}
 
 		typename vector<T*>::iterator end(){
-			return world.end();	
+			return world.end();
 		}
 
 		T*& at(int row, int col){
@@ -86,20 +88,20 @@ class Life {
 		}
 		/*
 		T* at(int row, int col){
-			return world.at(row*width + col);
+		return world.at(row*width + col);
 		}
 		*/
 
-        friend ostream& operator << (ostream& o, Life& life){  		
-		    for(int r = 0; r < life.height; r++) {
-		        for(int c = 0; c < life.width; c++) {
-		            AbstractCell* cell = life.at(r, c);
-		            o << cell;
-		        }
-		        o << endl;
-		    }
-    		return o;
-        }
+		friend ostream& operator << (ostream& o, Life& life){
+			for(int r = 0; r < life.height; r++) {
+				for(int c = 0; c < life.width; c++) {
+					AbstractCell* cell = life.at(r, c);
+					o << cell;
+				}
+				o << endl;
+			}
+			return o;
+		}
 };
 
 class AbstractCell{
@@ -108,10 +110,10 @@ class AbstractCell{
 		char newValue;
 	public:
 		AbstractCell(char v): value(v), newValue(-1){};
-		AbstractCell(const AbstractCell& rhs):value(rhs.value){};
-		virtual void update(vector<AbstractCell*> neighbors, int row, int col, 
+		AbstractCell(const AbstractCell& rhs):value(rhs.value), newValue(rhs.newValue){};
+		virtual void update(vector<AbstractCell*> neighbors, int row, int col,
 			int width, int height) = 0;
-		bool isEqual(const AbstractCell& rhs);
+		virtual bool isEqual(const AbstractCell& rhs);
 		void toNewValue();
 		friend ostream& operator << (ostream& o, AbstractCell* cell);
 };
@@ -119,8 +121,9 @@ class AbstractCell{
 class ConwayCell : public AbstractCell{
 	public:
 		ConwayCell(char v): AbstractCell(v) {};
-		void update(vector<AbstractCell*> neighbors, int row, int col, 
-			int width, int height);		
+		ConwayCell(const ConwayCell& rhs):AbstractCell(rhs){};
+		void update(vector<AbstractCell*> neighbors, int row, int col,
+			int width, int height);
 };
 
 class FredkinCell : public AbstractCell{
@@ -128,7 +131,8 @@ class FredkinCell : public AbstractCell{
 		int age;
 	public:
 		FredkinCell(char v): AbstractCell(v), age(0) {};
-		void update(vector<AbstractCell*> neighbors, int row, int col, 
+		FredkinCell(const FredkinCell& rhs):AbstractCell(rhs), age(rhs.age){};
+		void update(vector<AbstractCell*> neighbors, int row, int col,
 			int width, int height);
 };
 
@@ -138,7 +142,8 @@ class Cell : public AbstractCell{
 		FredkinCell f;
 	public:
 		Cell(char v): AbstractCell(v), c(v), f(v) {};
-		void update(vector<AbstractCell*> neighbors, int row, int col, 
+		Cell(const Cell& rhs):AbstractCell(rhs), c(rhs.c), f(rhs.f){};
+		void update(vector<AbstractCell*> neighbors, int row, int col,
 			int width, int height);
 };
 
