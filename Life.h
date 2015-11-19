@@ -111,9 +111,11 @@ class AbstractCell{
 	public:
 		AbstractCell(char v): value(v), newValue(-1){};
 		AbstractCell(const AbstractCell& rhs):value(rhs.value), newValue(rhs.newValue){};
+		virtual ~AbstractCell(){};
 		virtual void update(vector<AbstractCell*> neighbors) = 0;
 		virtual int isAlive() = 0;
 		void toNewValue();
+		virtual AbstractCell* clone() const = 0;
 		friend ostream& operator << (ostream& o, AbstractCell* cell);
 };
 
@@ -123,6 +125,7 @@ class ConwayCell : public AbstractCell{
 		ConwayCell(const ConwayCell& rhs):AbstractCell(rhs){};
 		void update(vector<AbstractCell*> neighbors);
 		int isAlive();
+		AbstractCell* clone() const;
 };
 
 class FredkinCell : public AbstractCell{
@@ -130,7 +133,7 @@ class FredkinCell : public AbstractCell{
 		int age;
 	public:
 		FredkinCell(char v): AbstractCell(v), age(0) {};
-		FredkinCell(const FredkinCell& rhs):AbstractCell(rhs), age(rhs.age){};
+		FredkinCell(const FredkinCell& rhs):AbstractCell(rhs), age(rhs.age){};		
 		void update(vector<AbstractCell*> neighbors);
 		int isAlive();
 		AbstractCell* clone() const;
@@ -143,9 +146,15 @@ class Cell : public AbstractCell{
 		Cell(char v): AbstractCell(v){
 			cell = new FredkinCell(v);
 		};
-		Cell(const Cell& rhs):AbstractCell(rhs), cell(){};
+		Cell(const Cell& rhs):AbstractCell(rhs){
+			cell = rhs.cell->clone();
+		};
+		~Cell(){
+			//delete cell;
+		}
 		void update(vector<AbstractCell*> neighbors);
 		int isAlive();
+		AbstractCell* clone() const;
 };
 
 #endif // Life_h

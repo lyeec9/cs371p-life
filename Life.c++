@@ -64,6 +64,10 @@ int ConwayCell::isAlive(){
 	return value!='.';
 }
 
+AbstractCell* ConwayCell::clone() const{
+	return new ConwayCell(value);
+}
+
 // -------------
 // FredkinCell Methods
 // -------------
@@ -113,7 +117,7 @@ int FredkinCell::isAlive(){
 }
 
 AbstractCell* FredkinCell::clone() const{
-	return new ConwayCell('*');
+	return new FredkinCell(value);
 }
 
 // -------------
@@ -124,7 +128,8 @@ void Cell::update(vector<AbstractCell*> neighbors){
 	cell->update(neighbors);
 	if (const FredkinCell* const p = dynamic_cast<const FredkinCell*>(cell)){
 		if(cell->isAlive()-1>1){
-			cell = p->clone();
+			//TODO:destroy old cell
+			cell = new ConwayCell('*');
 		}
 		if(cell->isAlive()==0){
 			value = '-';
@@ -141,5 +146,9 @@ void Cell::update(vector<AbstractCell*> neighbors){
 }
 
 int Cell::isAlive(){
-	return false;
+	return cell->isAlive();
+}
+
+AbstractCell* Cell::clone() const{
+	return new Cell(value);
 }

@@ -76,7 +76,7 @@ life-tests:
 html: Doxyfile Life.h Life.c++ RunLife.c++ TestLife.c++
 	doxygen Doxyfile
 
-life.log:
+Life.log:
 	git log > Life.log
 
 Doxyfile:
