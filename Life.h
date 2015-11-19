@@ -64,7 +64,7 @@ class Life {
 							}
 						}
 					}
-					at(r,c)->update(neighbors, r, c, width, height);
+					at(r,c)->update(neighbors);
 				}
 			}
 
@@ -111,9 +111,8 @@ class AbstractCell{
 	public:
 		AbstractCell(char v): value(v), newValue(-1){};
 		AbstractCell(const AbstractCell& rhs):value(rhs.value), newValue(rhs.newValue){};
-		virtual void update(vector<AbstractCell*> neighbors, int row, int col,
-			int width, int height) = 0;
-		virtual bool isEqual(const AbstractCell& rhs);
+		virtual void update(vector<AbstractCell*> neighbors) = 0;
+		virtual int isAlive() = 0;
 		void toNewValue();
 		friend ostream& operator << (ostream& o, AbstractCell* cell);
 };
@@ -122,8 +121,8 @@ class ConwayCell : public AbstractCell{
 	public:
 		ConwayCell(char v): AbstractCell(v) {};
 		ConwayCell(const ConwayCell& rhs):AbstractCell(rhs){};
-		void update(vector<AbstractCell*> neighbors, int row, int col,
-			int width, int height);
+		void update(vector<AbstractCell*> neighbors);
+		int isAlive();
 };
 
 class FredkinCell : public AbstractCell{
@@ -132,19 +131,21 @@ class FredkinCell : public AbstractCell{
 	public:
 		FredkinCell(char v): AbstractCell(v), age(0) {};
 		FredkinCell(const FredkinCell& rhs):AbstractCell(rhs), age(rhs.age){};
-		void update(vector<AbstractCell*> neighbors, int row, int col,
-			int width, int height);
+		void update(vector<AbstractCell*> neighbors);
+		int isAlive();
+		AbstractCell* clone() const;
 };
 
 class Cell : public AbstractCell{
 	private:
-		ConwayCell c;
-		FredkinCell f;
+		AbstractCell* cell;
 	public:
-		Cell(char v): AbstractCell(v), c(v), f(v) {};
-		Cell(const Cell& rhs):AbstractCell(rhs), c(rhs.c), f(rhs.f){};
-		void update(vector<AbstractCell*> neighbors, int row, int col,
-			int width, int height);
+		Cell(char v): AbstractCell(v){
+			cell = new FredkinCell(v);
+		};
+		Cell(const Cell& rhs):AbstractCell(rhs), cell(){};
+		void update(vector<AbstractCell*> neighbors);
+		int isAlive();
 };
 
 #endif // Life_h

@@ -23,15 +23,6 @@ using namespace std;
 // AbstractCell Methods
 // -------------
 
-bool AbstractCell::isEqual(const AbstractCell& rhs){
-	if(this->value == '.'){
-		return rhs.value == '.';
-	}
-	else{
-		return rhs.value != '.';
-	}
-}
-
 void AbstractCell::toNewValue(){
 	value = newValue;
 	newValue = 0;
@@ -45,16 +36,11 @@ ostream& operator << (ostream& o, AbstractCell* cell){
 // ConwayCell Methods
 // -------------
 
-void ConwayCell::update(vector<AbstractCell*> neighbors, int row, int col, int width, int height){
+void ConwayCell::update(vector<AbstractCell*> neighbors){
 	int aliveNeighbors = 0;
 	for(AbstractCell* cellPtr: neighbors){
 		if(cellPtr != 0){
-			//if dead and not equal neighbor
-			if(value == '.' && !isEqual(*cellPtr)){
-				aliveNeighbors++;
-			}
-			//if alive and equal neighbor
-			else if(value == '*' && isEqual(*cellPtr)){
+			if(cellPtr->isAlive()){
 				aliveNeighbors++;
 			}
 		}
@@ -63,7 +49,7 @@ void ConwayCell::update(vector<AbstractCell*> neighbors, int row, int col, int w
 		newValue = '*';
 	}
 	else if(aliveNeighbors == 2){
-		if(value == '*'){
+		if(isAlive()){
 			newValue = '*';
 		}
 		else{
@@ -74,22 +60,21 @@ void ConwayCell::update(vector<AbstractCell*> neighbors, int row, int col, int w
 	}
 }
 
+int ConwayCell::isAlive(){
+	return value!='.';
+}
+
 // -------------
 // FredkinCell Methods
 // -------------
 
-void FredkinCell::update(vector<AbstractCell*> neighbors, int row, int col, int width, int height){
+void FredkinCell::update(vector<AbstractCell*> neighbors){
 	int aliveNeighbors = 0;
 	int pos = 0;
 	for(AbstractCell* cellPtr: neighbors){
 		if(pos==1 || pos==3 || pos==4 || pos==6){
 			if(cellPtr != 0){
-				//if dead and not equal neighbor
-				if(value == '-' && !isEqual(*cellPtr)){
-					aliveNeighbors++;
-				}
-				//if alive and equal neighbor
-				else if(value != '-' && isEqual(*cellPtr)){
+				if(cellPtr->isAlive()){
 					aliveNeighbors++;
 				}
 			}
@@ -98,7 +83,7 @@ void FredkinCell::update(vector<AbstractCell*> neighbors, int row, int col, int 
 	}
 	if(value == '-'){
 		if(aliveNeighbors == 1 || aliveNeighbors == 3){
-			newValue = age - '0';
+			newValue = age + '0';
 		}
 		else{
 			newValue = '-';
@@ -114,16 +99,47 @@ void FredkinCell::update(vector<AbstractCell*> neighbors, int row, int col, int 
 				newValue = '+';
 			}
 			else{
-				newValue = age - '0';
+				newValue = age + '0';
 			}
 		}
 	}
+}
+
+int FredkinCell::isAlive(){
+	if(value!='-'){
+		return age+1;
+	}
+	return 0;
+}
+
+AbstractCell* FredkinCell::clone() const{
+	return new ConwayCell('*');
 }
 
 // -------------
 // Cell Methods
 // -------------
 
-void Cell::update(vector<AbstractCell*> neighbors, int row, int col, int width, int height){
+void Cell::update(vector<AbstractCell*> neighbors){
+	cell->update(neighbors);
+	if (const FredkinCell* const p = dynamic_cast<const FredkinCell*>(cell)){
+		if(cell->isAlive()-1>1){
+			cell = p->clone();
+		}
+		if(cell->isAlive()==0){
+			value = '-';
+		}else{
+			value = cell->isAlive()-1+'0';
+		}
+	}else{
+		if(cell->isAlive()==0){
+			value = '.';
+		}else{
+			value = '*';
+		}
+	}
+}
 
+int Cell::isAlive(){
+	return false;
 }

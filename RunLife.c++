@@ -80,10 +80,6 @@ int main () {
         }
       }
       for(int i = 0; i < steps+1; i++){
-
-        //I swapped the order of print and step for correctness
-        //However, if you leave step here without the print, step still breaks
-        //on the first iteration.
         if(i%outputFreq == 0){
           cout << life <<endl;
         }
