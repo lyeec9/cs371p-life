@@ -65,6 +65,7 @@ class Life {
 						}
 					}
 					at(r,c)->update(neighbors);
+					//cout << at(r,c)->isAlive();
 				}
 			}
 
@@ -136,6 +137,7 @@ class FredkinCell : public AbstractCell{
 		FredkinCell(const FredkinCell& rhs):AbstractCell(rhs), age(rhs.age){};		
 		void update(vector<AbstractCell*> neighbors);
 		int isAlive();
+		int isNewAlive() const;
 		AbstractCell* clone() const;
 };
 

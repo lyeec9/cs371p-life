@@ -116,6 +116,13 @@ int FredkinCell::isAlive(){
 	return 0;
 }
 
+int FredkinCell::isNewAlive() const{
+	if(newValue!='-'){
+		return age+1;
+	}
+	return 0;
+}
+
 AbstractCell* FredkinCell::clone() const{
 	return new FredkinCell(value);
 }
@@ -127,20 +134,23 @@ AbstractCell* FredkinCell::clone() const{
 void Cell::update(vector<AbstractCell*> neighbors){
 	cell->update(neighbors);
 	if (const FredkinCell* const p = dynamic_cast<const FredkinCell*>(cell)){
-		if(cell->isAlive()-1>1){
+		if(p->isNewAlive()-1>1){
 			//TODO:destroy old cell
 			cell = new ConwayCell('*');
+			newValue = '*';
 		}
-		if(cell->isAlive()==0){
-			value = '-';
-		}else{
-			value = cell->isAlive()-1+'0';
+		else{
+			if(p->isNewAlive()==0){
+				newValue = '-';
+			}else{
+				newValue = p->isNewAlive()-1+'0';
+			}
 		}
 	}else{
 		if(cell->isAlive()==0){
-			value = '.';
+			newValue = '.';
 		}else{
-			value = '*';
+			newValue = '*';
 		}
 	}
 }
