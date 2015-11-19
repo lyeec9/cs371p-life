@@ -64,6 +64,10 @@ int ConwayCell::isAlive(){
 	return value!='.';
 }
 
+int ConwayCell::isNewAlive() const{
+	return newValue!='.';
+}
+
 AbstractCell* ConwayCell::clone() const{
 	return new ConwayCell(value);
 }
@@ -147,7 +151,7 @@ void Cell::update(vector<AbstractCell*> neighbors){
 			}
 		}
 	}else{
-		if(cell->isAlive()==0){
+		if(cell->isNewAlive()==0){
 			newValue = '.';
 		}else{
 			newValue = '*';
@@ -159,6 +163,15 @@ int Cell::isAlive(){
 	return cell->isAlive();
 }
 
+int Cell::isNewAlive() const{
+	return cell->isNewAlive();
+}
+
 AbstractCell* Cell::clone() const{
 	return new Cell(value);
+}
+
+void Cell::toNewValue(){
+	value = newValue;
+	cell->toNewValue();
 }

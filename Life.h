@@ -65,7 +65,6 @@ class Life {
 						}
 					}
 					at(r,c)->update(neighbors);
-					//cout << at(r,c)->isAlive();
 				}
 			}
 
@@ -115,7 +114,8 @@ class AbstractCell{
 		virtual ~AbstractCell(){};
 		virtual void update(vector<AbstractCell*> neighbors) = 0;
 		virtual int isAlive() = 0;
-		void toNewValue();
+		virtual int isNewAlive() const= 0;
+		virtual void toNewValue();
 		virtual AbstractCell* clone() const = 0;
 		friend ostream& operator << (ostream& o, AbstractCell* cell);
 };
@@ -126,6 +126,7 @@ class ConwayCell : public AbstractCell{
 		ConwayCell(const ConwayCell& rhs):AbstractCell(rhs){};
 		void update(vector<AbstractCell*> neighbors);
 		int isAlive();
+		int isNewAlive() const;
 		AbstractCell* clone() const;
 };
 
@@ -156,7 +157,9 @@ class Cell : public AbstractCell{
 		}
 		void update(vector<AbstractCell*> neighbors);
 		int isAlive();
+		int isNewAlive() const;
 		AbstractCell* clone() const;
+		void toNewValue();
 };
 
 #endif // Life_h
