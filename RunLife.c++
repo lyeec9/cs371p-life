@@ -28,12 +28,15 @@ int main () {
     getline(cin,line);
     int outputFreq = stoi(line);
 
-    cout << "cell type \"" + cellType + "\""<<endl;
-    cout << "compare with fredkin cell" + to_string(cellType.compare("FredkinCell") ) << endl;
-    cout << "rows" + to_string(rows) <<endl;
-    cout << "cols" + to_string(cols) <<endl;
-    cout << "steps" + to_string(steps) <<endl;
-    cout << "outputFreq" + to_string(outputFreq) <<endl;
+    //cout << "cell type \"" + cellType + "\""<<endl;
+    //cout << "compare with fredkin cell" + to_string(cellType.compare("FredkinCell") ) << endl;
+    //cout << "rows" + to_string(rows) <<endl;
+    //cout << "cols" + to_string(cols) <<endl;
+    //cout << "steps" + to_string(steps) <<endl;
+    //cout << "outputFreq" + to_string(outputFreq) <<endl;
+
+    cout << "*** Life<" << cellType << "> " << rows << "x" << cols << " ***" << endl;
+    cout << endl;
 
     /*fix scope problem
     if(strcmp(cellType, "FredkinCell"))
@@ -65,7 +68,7 @@ int main () {
       }
       for(int i = 0; i < steps+1; i++){
         if(i%outputFreq == 0){
-          cout << life <<endl;
+          cout << "Generation = " << i << ", " << life <<endl;
         }
         life.step();
       }
@@ -81,7 +84,7 @@ int main () {
       }
       for(int i = 0; i < steps+1; i++){
         if(i%outputFreq == 0){
-          cout << life <<endl;
+          cout << "Generation = " << i << ", " << life <<endl;
         }
         life.step();
       }
@@ -97,7 +100,7 @@ int main () {
       }
       for(int i = 0; i < steps+1; i++){
         if(i%outputFreq == 0){
-          cout << life <<endl;
+          cout << "Generation = " << i << ", " << life <<endl;
         }
         life.step();
       }

@@ -93,6 +93,15 @@ class Life {
 		*/
 
 		friend ostream& operator << (ostream& o, Life& life){
+			int pop = 0;
+			for(int r = 0; r < life.height; r++) {
+				for(int c = 0; c < life.width; c++) {
+					if((life.at(r, c))->isAlive()){
+						pop++;
+					}
+				}
+			}
+			o << "Population = " << pop << "." << endl;
 			for(int r = 0; r < life.height; r++) {
 				for(int c = 0; c < life.width; c++) {
 					AbstractCell* cell = life.at(r, c);
