@@ -26,16 +26,57 @@ ostream& operator << (ostream& o, AbstractCell* cell);
 
 template<typename T>
 class Life {
+
 	private:
 		int width, height;
 		vector<T*> world;
 		vector<T> cells;
+
+		FRIEND_TEST(LifeTests, constructor_1);	
+		FRIEND_TEST(LifeTests, addCell_1);	
+		FRIEND_TEST(LifeTests, addCell_2);	
+		FRIEND_TEST(LifeTests, addCell_3);	
+		FRIEND_TEST(LifeTests, step_1);	
+		FRIEND_TEST(LifeTests, step_2);	
+		FRIEND_TEST(LifeTests, step_3);	
+		FRIEND_TEST(LifeTests, step_4);	
+
+		FRIEND_TEST(LifeTests, begin_1);	
+		FRIEND_TEST(LifeTests, begin_2);	
+		FRIEND_TEST(LifeTests, begin_3);	
+		FRIEND_TEST(LifeTests, begin_4);	
+		FRIEND_TEST(LifeTests, begin_5);	
+
+		FRIEND_TEST(LifeTests, end_1);	
+		FRIEND_TEST(LifeTests, end_2);	
+		FRIEND_TEST(LifeTests, end_3);	
+
+		FRIEND_TEST(LifeTests, at_1);	
+		FRIEND_TEST(LifeTests, at_2);	
+		FRIEND_TEST(LifeTests, at_3);	
+
+		FRIEND_TEST(LifeTests, print_1);	
+		FRIEND_TEST(LifeTests, print_2);	
+		FRIEND_TEST(LifeTests, print_3);	
+		FRIEND_TEST(LifeTests, print_4);	
 	public:
 
+		/**
+         * @param w the width of the board
+         * @param h the height of the board
+         *
+         * Constructor for Life.
+         */
 		Life(int w, int h): width(w), height(h){
 
 		}
 
+		/**
+         * @param cell the AbstractCell to add
+         *
+         * Adds a cell to the vector Cell. Once all cells have been added, stores a 
+         * list of pointers for iteration purposes.
+         */
 		void addCell(T cell){
 			cells.push_back(cell);
 			if(cells.size()==height*width){
@@ -47,6 +88,10 @@ class Life {
 			}
 		}
 
+		/**
+         * Runs the calculations for all AbstractCells inside of Life. Stores a new value for all of the cells inside
+         * each cell's newValue, and updates all values to match the new ones once everything has been calculated.
+         */
 		void step(){
 			for(int r = 0; r < height; ++r){
 				for(int c = 0; c < width; c++){
@@ -75,23 +120,42 @@ class Life {
 			}
 		}
 
+		/**
+         * @return an iterator to the start of the world vector
+		 *
+		 * Method that allows Life to be iterable from the beginning
+         */
 		typename vector<T*>::iterator begin(){
 			return world.begin();
 		}
 
+		/**
+         * @return an iterator to the end of the world vector
+		 *
+		 * Method that allows Life to be iterable to the end
+         */
 		typename vector<T*>::iterator end(){
 			return world.end();
 		}
 
+		/**
+         * @param row the row value to search the world for
+         * @param col the column value to search the world for
+         * @return the pointer to a location of a specified AbstractCell
+		 *
+		 * Allows the user to search a specified row col spot in Life for an AbstractCell.
+         */
 		T*& at(int row, int col){
 			return world[row*width + col];
 		}
-		/*
-		T* at(int row, int col){
-		return world.at(row*width + col);
-		}
-		*/
 
+		/**
+         * @param o the ostream to print out to
+         * @param life the instance of life to output
+         * @return the output stream that contains the output of life
+		 *
+		 * Iterates through the life grid and prints out every cell's value
+         */
 		friend ostream& operator << (ostream& o, Life& life){
 			int pop = 0;
 			for(int r = 0; r < life.height; r++) {
@@ -172,6 +236,11 @@ class AbstractCell{
 		FRIEND_TEST(FredkinCellTests, clone_3);
 		FRIEND_TEST(FredkinCellTests, clone_5);
 		FRIEND_TEST(FredkinCellTests, clone_6);
+
+		FRIEND_TEST(AbstractCellTests, constructor_1);
+		FRIEND_TEST(AbstractCellTests, print_1);
+		FRIEND_TEST(AbstractCellTests, print_2);
+
 	public:
 		AbstractCell(char v): value(v), newValue(-1){};
 		virtual ~AbstractCell(){};
@@ -208,7 +277,7 @@ class FredkinCell : public AbstractCell{
 		FRIEND_TEST(FredkinCellTests, clone_5);
 		FRIEND_TEST(FredkinCellTests, clone_6);
 	public:
-		FredkinCell(char v): AbstractCell(v), age(0) {};
+		FredkinCell(char v): AbstractCell(v), age(0) {};	
 		void update(vector<AbstractCell*> neighbors);
 		int isAlive();
 		int isNewAlive() const;
@@ -226,7 +295,7 @@ class Cell : public AbstractCell{
 			cell = rhs.cell->clone();
 		};
 		~Cell(){
-			//delete cell;
+			delete cell;
 		}
 		void update(vector<AbstractCell*> neighbors);
 		int isAlive();

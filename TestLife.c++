@@ -17,6 +17,406 @@
 #include "Life.h"
 
 // --------------
+// LifeTests
+// --------------
+
+TEST(LifeTests, constructor_1) {
+	int width = 10;
+	int height = 20;
+	Life<Cell> life(width, height);
+	ASSERT_EQ(width, life.width);
+	ASSERT_EQ(height, life.height);
+}
+
+
+
+TEST(LifeTests, addCell_1) {
+	int width = 1;
+	int height = 2;
+	Life<ConwayCell> life(width, height);
+	ConwayCell cell_1('.');
+	ConwayCell cell_2 = '*';
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	ASSERT_EQ(2, life.cells.size());
+	ASSERT_EQ(2, life.world.size());
+	ASSERT_EQ(life.world.at(0),&life.cells.at(0));
+	ASSERT_EQ(life.world.at(1),&life.cells.at(1));
+	ASSERT_FALSE(life.cells.at(0).isAlive());
+	ASSERT_TRUE(life.cells.at(1).isAlive());
+}
+
+TEST(LifeTests, addCell_2) {
+	int width = 1;
+	int height = 3;
+	Life<FredkinCell> life(width, height);
+	FredkinCell cell_1('-');
+	FredkinCell cell_2('4');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	ASSERT_EQ(2, life.cells.size());
+	ASSERT_EQ(0, life.world.size());
+	ASSERT_FALSE(life.cells.at(0).isAlive());
+	ASSERT_TRUE(life.cells.at(1).isAlive());
+}
+
+TEST(LifeTests, addCell_3) {
+	int width = 1;
+	int height = 3;
+	Life<Cell> life(width, height);
+	Cell cell_1('-');
+	Cell cell_2('0');
+	Cell cell_3('-');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	life.addCell(cell_3);
+	ASSERT_EQ(3, life.cells.size());
+	ASSERT_EQ(3, life.world.size());
+	ASSERT_FALSE(life.cells.at(0).isAlive());
+	ASSERT_TRUE(life.cells.at(1).isAlive());
+	ASSERT_FALSE(life.cells.at(2).isAlive());
+}
+
+
+
+TEST(LifeTests, step_1) {
+	int width = 1;
+	int height = 1;
+	Life<ConwayCell> life(width, height);
+	ConwayCell cell_1('.');
+	life.addCell(cell_1);
+	ASSERT_FALSE(life.cells.at(0).isAlive());
+	life.step();
+	ASSERT_FALSE(life.cells.at(0).isAlive());
+}
+
+TEST(LifeTests, step_2) {
+	int width = 2;
+	int height = 2;
+	Life<ConwayCell> life(width, height);
+	ConwayCell cell_1('.');
+	ConwayCell cell_2('*');
+	ConwayCell cell_3('*');
+	ConwayCell cell_4('*');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	life.addCell(cell_3);
+	life.addCell(cell_4);
+	ASSERT_FALSE(life.cells.at(0).isAlive());
+	ASSERT_TRUE(life.cells.at(1).isAlive());
+	ASSERT_TRUE(life.cells.at(2).isAlive());
+	ASSERT_TRUE(life.cells.at(3).isAlive());;
+
+	ASSERT_EQ(4, life.cells.size());
+	ASSERT_EQ(4, life.world.size());
+
+	life.step();
+
+	ASSERT_TRUE(life.cells.at(0).isAlive());
+	ASSERT_TRUE(life.cells.at(1).isAlive());
+	ASSERT_TRUE(life.cells.at(2).isAlive());
+	ASSERT_TRUE(life.cells.at(3).isAlive());;
+}
+
+
+TEST(LifeTests, step_3) {
+	int width = 2;
+	int height = 2;
+	Life<FredkinCell> life(width, height);
+	FredkinCell cell_1('-');
+	FredkinCell cell_2('0');
+	FredkinCell cell_3('0');
+	FredkinCell cell_4('-');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	life.addCell(cell_3);
+	life.addCell(cell_4);
+	ASSERT_FALSE(life.cells.at(0).isAlive());
+	ASSERT_TRUE(life.cells.at(1).isAlive());
+	ASSERT_TRUE(life.cells.at(2).isAlive());
+	ASSERT_FALSE(life.cells.at(3).isAlive());;
+
+	ASSERT_EQ(4, life.cells.size());
+	ASSERT_EQ(4, life.world.size());
+
+	life.step();
+	life.step();
+	life.step();
+
+	ASSERT_FALSE(life.cells.at(0).isAlive());
+	ASSERT_FALSE(life.cells.at(1).isAlive());
+	ASSERT_FALSE(life.cells.at(2).isAlive());
+	ASSERT_FALSE(life.cells.at(3).isAlive());
+}
+
+TEST(LifeTests, step_4) {
+	int width = 2;
+	int height = 2;
+	Life<Cell> life(width, height);
+	Cell cell_1('-');
+	Cell cell_2('0');
+	Cell cell_3('0');
+	Cell cell_4('-');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	life.addCell(cell_3);
+	life.addCell(cell_4);
+	ASSERT_FALSE(life.cells.at(0).isAlive());
+	ASSERT_TRUE(life.cells.at(1).isAlive());
+	ASSERT_TRUE(life.cells.at(2).isAlive());
+	ASSERT_FALSE(life.cells.at(3).isAlive());;
+
+	ASSERT_EQ(4, life.cells.size());
+	ASSERT_EQ(4, life.world.size());
+
+	life.step();
+	life.step();
+	life.step();
+
+	ASSERT_FALSE(life.cells.at(0).isAlive());
+	ASSERT_FALSE(life.cells.at(1).isAlive());
+	ASSERT_FALSE(life.cells.at(2).isAlive());
+	ASSERT_FALSE(life.cells.at(3).isAlive());
+}
+
+
+TEST(LifeTests, begin_1){
+	int width = 2;
+	int height = 2;
+	Life<Cell> life(width, height);
+	Cell cell_1('-');
+	Cell cell_2('0');
+	Cell cell_3('0');
+	Cell cell_4('-');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	life.addCell(cell_3);
+	life.addCell(cell_4);
+	ASSERT_FALSE ((*life.begin()) -> isAlive() );
+}
+
+TEST(LifeTests, begin_2){
+	int width = 1;
+	int height = 1;
+	Life<Cell> life(width, height);
+	Cell cell_1('0');
+	life.addCell(cell_1);
+	ASSERT_TRUE ((*life.begin()) -> isAlive() );
+}
+
+TEST(LifeTests, begin_3){
+	int width = 1;
+	int height = 1;
+	Life<ConwayCell> life(width, height);
+	ConwayCell cell_1('*');
+	life.addCell(cell_1);
+	ASSERT_TRUE ((*life.begin()) -> isAlive() );
+}
+
+TEST(LifeTests, begin_4){
+	int width = 1;
+	int height = 1;
+	Life<ConwayCell> life(width, height);
+	ConwayCell cell_1('.');
+	life.addCell(cell_1);
+	ASSERT_FALSE ((*life.begin()) -> isAlive() );
+}
+
+TEST(LifeTests, begin_5){
+	int width = 1;
+	int height = 3;
+	Life<ConwayCell> life(width, height);
+	ConwayCell cell_1('.');
+	ConwayCell cell_2('.');
+	ConwayCell cell_3('*');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	life.addCell(cell_3);
+	ASSERT_FALSE ((*life.begin()) -> isAlive() );
+	ASSERT_FALSE (life.begin()[1] -> isAlive() );
+	ASSERT_TRUE (life.begin()[2] -> isAlive() );
+}
+
+
+TEST(LifeTests, end_1){
+	int width = 2;
+	int height = 2;
+	Life<ConwayCell> life(width, height);
+	ConwayCell cell_1('.');
+	ConwayCell cell_2('.');
+	ConwayCell cell_3('.');
+	ConwayCell cell_4('.');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	life.addCell(cell_3);
+	life.addCell(cell_4);
+	for(std::vector<ConwayCell*>::iterator it = life.begin() ; it != life.end(); ++it){
+		ASSERT_FALSE( (*it)->isAlive() );
+	}
+
+}
+
+TEST(LifeTests, end_2){
+	int width = 2;
+	int height = 1;
+	Life<ConwayCell> life(width, height);
+	ConwayCell cell_1('.');
+	ConwayCell cell_2('*');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	std::vector<ConwayCell*>::iterator it = life.begin();
+	ASSERT_FALSE( (*it)->isAlive() );
+	it++;
+	ASSERT_TRUE( (*it)->isAlive() );
+
+}
+
+TEST(LifeTests, end_3){
+	int width = 1;
+	int height = 1;
+	Life<ConwayCell> life(width, height);
+	ConwayCell cell_1('.');
+	life.addCell(cell_1);
+	ASSERT_FALSE( life.end() == life.begin());
+}
+
+
+
+TEST(LifeTests, at_1){
+	int width = 2;
+	int height = 2;
+	Life<ConwayCell> life(width, height);
+	ConwayCell cell_1('.');
+	ConwayCell cell_2('*');
+	ConwayCell cell_3('*');
+	ConwayCell cell_4('.');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	life.addCell(cell_3);
+	life.addCell(cell_4);
+	ASSERT_FALSE(life.at(0,0) -> isAlive());
+	ASSERT_TRUE(life.at(0,1) -> isAlive());
+	ASSERT_TRUE(life.at(1,0) -> isAlive());
+	ASSERT_FALSE(life.at(1,1) -> isAlive());
+
+}
+
+TEST(LifeTests, at_2){
+	int width = 2;
+	int height = 1;
+	Life<FredkinCell> life(width, height);
+	FredkinCell cell_1('-');
+	FredkinCell cell_2('1');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	ASSERT_FALSE(life.at(0,0) -> isAlive());
+	ASSERT_TRUE(life.at(0,1) -> isAlive());
+
+}
+
+TEST(LifeTests, at_3){
+	int width = 1;
+	int height = 1;
+	Life<Cell> life(width, height);
+	Cell cell_1('-');
+	life.addCell(cell_1);
+	ASSERT_FALSE( life.at(0,0) -> isAlive());
+}
+
+
+TEST(LifeTests, print_1){
+	int width = 1;
+	int height = 1;
+	Life<Cell> life(width, height);
+	Cell cell_1('-');
+	life.addCell(cell_1);
+	ostringstream oss;
+	oss << life;
+	ASSERT_EQ("Population = 0.\n-\n",oss.str());
+}
+
+TEST(LifeTests, print_2){
+	int width = 2;
+	int height = 2;
+	Life<ConwayCell> life(width, height);
+	ConwayCell cell_1('.');
+	ConwayCell cell_2('*');
+	ConwayCell cell_3('*');
+	ConwayCell cell_4('.');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	life.addCell(cell_3);
+	life.addCell(cell_4);
+	ostringstream oss;
+	oss << life;
+	ASSERT_EQ("Population = 2.\n.*\n*.\n",oss.str());
+}
+
+TEST(LifeTests, print_3){
+	int width = 1;
+	int height = 2;
+	Life<Cell> life(width, height);
+	Cell cell_1('0');
+	Cell cell_2('0');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	life.step();
+	ostringstream oss;
+	oss << life;
+
+	ASSERT_EQ("Population = 2.\n1\n1\n",oss.str());
+}
+
+TEST(LifeTests, print_4){
+	int width = 2;
+	int height = 2;
+	Life<FredkinCell> life(width, height);
+	FredkinCell cell_1('-');
+	FredkinCell cell_2('0');
+	FredkinCell cell_3('0');
+	FredkinCell cell_4('-');
+	life.addCell(cell_1);
+	life.addCell(cell_2);
+	life.addCell(cell_3);
+	life.addCell(cell_4);
+	ostringstream oss;
+	oss << life;
+	ASSERT_EQ("Population = 2.\n-0\n0-\n",oss.str());
+}
+
+
+
+
+
+// --------------
+// AbstractCell
+// --------------
+
+TEST(AbstractCellTests, constructor_1){
+	Cell cell_1('-');
+	ASSERT_EQ('-',cell_1.value);
+	ASSERT_EQ(-1,cell_1.newValue);
+}
+
+
+TEST(AbstractCellTests, print_1){
+	Cell cell_1('-');
+	ostringstream oss;
+	oss << &cell_1;
+	ASSERT_EQ("-",oss.str());
+}
+
+TEST(AbstractCellTests, print_2){
+	ConwayCell cell_1('.');
+	ostringstream oss;
+	oss << &cell_1;
+	ASSERT_EQ(".",oss.str());
+}
+
+
+
+
+// --------------
 // ConwayCellTests
 // --------------
 
