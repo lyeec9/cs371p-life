@@ -141,7 +141,7 @@ void Cell::update(vector<AbstractCell*> neighbors){
 	cell->update(neighbors);
 	if (const FredkinCell* const p = dynamic_cast<const FredkinCell*>(cell)){
 		if(p->isNewAlive()-1>1){
-			//TODO:destroy old cell
+			delete cell;
 			cell = new ConwayCell('*');
 			newValue = '*';
 		}
