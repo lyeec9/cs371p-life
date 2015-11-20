@@ -261,22 +261,96 @@ class AbstractCell{
 		FRIEND_TEST(CellTests, update_3);
 		FRIEND_TEST(CellTests, update_4);
 	public:
+		/**
+         * @param v the initial value for the AbstractCell
+         *
+         * Constructor for AbstractCell.
+         */
 		AbstractCell(char v): value(v), newValue(-1){};
+
+		/**
+         * Virtual destructor for AbstractCell
+         */
 		virtual ~AbstractCell(){};
+
+		/**
+         * @param neighbors a list of neighbors starting at the top left corner
+         *
+         * updates the cell based on the neighbors surrounding it.
+         */
 		virtual void update(vector<AbstractCell*> neighbors) = 0;
+
+		/**
+		 * @return the cell's age if it is alive and 0 otherwise
+		 *
+         * Returns whether or not the cell is alive.
+         */
 		virtual int isAlive() = 0;
+
+		/**
+		 * @return the cell's age if it is alive and 0 otherwise
+		 *
+         * Returns whether or not the cell will be alive.
+         */
 		virtual int isNewAlive() const= 0;
+
+		/**
+         * Converts the cell's current value to its future value after all updates have executed
+         */
 		virtual void toNewValue();
+
+		/**
+		 * @return the pointer to the newly created object
+		 *
+         * Creates a clone of the cell for the purposes of a copy constructor
+         */
 		virtual AbstractCell* clone() const = 0;
+
+		/**
+		 * @param o the output stream to output to
+		 * @param cell the AbstractCell pointer to output
+		 * @return the output stream that contains the value of the cell
+		 *
+         * Outputs the value of the given cell
+         */
 		friend ostream& operator << (ostream& o, AbstractCell* cell);
 };
 
 class ConwayCell : public AbstractCell{
 	public:
+		/**
+         * @param v the initial value for the ConwayCell
+         *
+         * Constructor for ConwayCell.
+         */
 		ConwayCell(char v): AbstractCell(v) {};
+
+		/**
+         * @param neighbors a list of neighbors starting at the top left corner
+         *
+         * updates the cell based on the neighbors surrounding it.
+         */		
 		void update(vector<AbstractCell*> neighbors);
+
+		/**
+		 * @return the cell's age if it is alive and 0 otherwise
+		 *
+         * Returns whether or not the cell is alive.
+         */
 		int isAlive();
+
+		/**
+		 * @return the cell's age if it is alive and 0 otherwise
+		 *
+         * Returns whether or not the cell will be alive.
+         */
 		int isNewAlive() const;
+
+		/**
+		 * @return the pointer to the newly created object
+		 *
+         * Creates a clone of the cell for the purposes of a copy constructor
+         */
 		AbstractCell* clone() const;
 };
 
@@ -296,10 +370,40 @@ class FredkinCell : public AbstractCell{
 		FRIEND_TEST(FredkinCellTests, clone_5);
 		FRIEND_TEST(FredkinCellTests, clone_6);
 	public:
+
+		/**
+         * @param v the initial value for the FredkinCell
+         *
+         * Constructor for FredkinCell.
+         */
 		FredkinCell(char v): AbstractCell(v), age(0) {};	
+
+		/**
+         * @param neighbors a list of neighbors starting at the top left corner
+         *
+         * updates the cell based on the neighbors surrounding it.
+         */		
 		void update(vector<AbstractCell*> neighbors);
+
+		/**
+		 * @return the cell's age if it is alive and 0 otherwise
+		 *
+         * Returns whether or not the cell is alive.
+         */
 		int isAlive();
+
+		/**
+		 * @return the cell's age if it is alive and 0 otherwise
+		 *
+         * Returns whether or not the cell will be alive.
+         */
 		int isNewAlive() const;
+
+		/**
+		 * @return the pointer to the newly created object
+		 *
+         * Creates a clone of the cell for the purposes of a copy constructor
+         */
 		AbstractCell* clone() const;
 };
 
@@ -322,19 +426,63 @@ class Cell : public AbstractCell{
 		FRIEND_TEST(CellTests, update_3);
 		FRIEND_TEST(CellTests, update_4);
 	public:
+
+		/**
+         * @param v the initial value for the Cell
+         *
+         * Constructor for Cell.
+         */
 		Cell(char v): AbstractCell(v){
 			cell = new FredkinCell(v);
-		};
+		}
+
+		/**
+         * @param rhs the cell to create a copy of
+         *
+         * Copy Constructor for Cell.
+         */
 		Cell(const Cell& rhs):AbstractCell(rhs){
 			cell = rhs.cell->clone();
-		};
+		}
+
+		/**
+         * Destructor for cell
+         */
 		~Cell(){
 			delete cell;
 		}
+
+		/**
+         * @param neighbors a list of neighbors starting at the top left corner
+         *
+         * updates the cell based on the neighbors surrounding it.
+         */	
 		void update(vector<AbstractCell*> neighbors);
+
+		/**
+		 * @return the cell's age if it is alive and 0 otherwise
+		 *
+         * Returns whether or not the cell is alive.
+         */
 		int isAlive();
+
+		/**
+		 * @return the cell's age if it is alive and 0 otherwise
+		 *
+         * Returns whether or not the cell will be alive.
+         */
 		int isNewAlive() const;
+
+		/**
+		 * @return the pointer to the newly created object
+		 *
+         * Creates a clone of the cell for the purposes of a copy constructor
+         */
 		AbstractCell* clone() const;
+
+		/**
+         * Converts the cell's current value to its future value after all updates have executed
+         */
 		void toNewValue();
 };
 
