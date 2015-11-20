@@ -128,7 +128,9 @@ int FredkinCell::isNewAlive() const{
 }
 
 AbstractCell* FredkinCell::clone() const{
-	return new FredkinCell(value);
+	FredkinCell* f = new FredkinCell(value);
+	f->age = age;
+	return f;
 }
 
 // -------------

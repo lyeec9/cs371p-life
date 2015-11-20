@@ -117,9 +117,63 @@ class AbstractCell{
 	protected:
 		char value;
 		char newValue;
+
+		FRIEND_TEST(ConwayCellTests, constructor_1);
+		FRIEND_TEST(ConwayCellTests, constructor_2);
+		FRIEND_TEST(ConwayCellTests, update_1);
+		FRIEND_TEST(ConwayCellTests, update_2);
+		FRIEND_TEST(ConwayCellTests, update_3);
+		FRIEND_TEST(ConwayCellTests, update_4);
+		FRIEND_TEST(ConwayCellTests, update_5);
+		FRIEND_TEST(ConwayCellTests, update_6);
+		FRIEND_TEST(ConwayCellTests, update_7);
+		FRIEND_TEST(ConwayCellTests, update_8);
+		FRIEND_TEST(ConwayCellTests, update_9);
+		FRIEND_TEST(ConwayCellTests, update_10);
+		FRIEND_TEST(ConwayCellTests, isAlive_3);
+		FRIEND_TEST(ConwayCellTests, isAlive_4);
+		FRIEND_TEST(ConwayCellTests, isNewAlive_1);
+		FRIEND_TEST(ConwayCellTests, isNewAlive_2);
+		FRIEND_TEST(ConwayCellTests, isNewAlive_3);
+		FRIEND_TEST(ConwayCellTests, isNewAlive_4);
+		FRIEND_TEST(ConwayCellTests, clone_1);
+		FRIEND_TEST(ConwayCellTests, clone_3);
+
+		FRIEND_TEST(FredkinCellTests, constructor_1);
+		FRIEND_TEST(FredkinCellTests, constructor_2);
+		FRIEND_TEST(FredkinCellTests, update_1);
+		FRIEND_TEST(FredkinCellTests, update_2);
+		FRIEND_TEST(FredkinCellTests, update_3);
+		FRIEND_TEST(FredkinCellTests, update_4);
+		FRIEND_TEST(FredkinCellTests, update_5);
+		FRIEND_TEST(FredkinCellTests, update_6);
+		FRIEND_TEST(FredkinCellTests, update_7);
+		FRIEND_TEST(FredkinCellTests, update_8);
+		FRIEND_TEST(FredkinCellTests, update_9);
+		FRIEND_TEST(FredkinCellTests, update_10);
+		FRIEND_TEST(FredkinCellTests, update_11);
+		FRIEND_TEST(FredkinCellTests, update_12);
+		FRIEND_TEST(FredkinCellTests, update_13);
+		FRIEND_TEST(FredkinCellTests, update_14);
+		FRIEND_TEST(FredkinCellTests, update_15);
+		FRIEND_TEST(FredkinCellTests, update_16);
+		FRIEND_TEST(FredkinCellTests, isAlive_3);
+		FRIEND_TEST(FredkinCellTests, isAlive_4);
+		FRIEND_TEST(FredkinCellTests, isAlive_5);
+		FRIEND_TEST(FredkinCellTests, isAlive_6);
+		FRIEND_TEST(FredkinCellTests, isNewAlive_1);
+		FRIEND_TEST(FredkinCellTests, isNewAlive_2);
+		FRIEND_TEST(FredkinCellTests, isNewAlive_3);
+		FRIEND_TEST(FredkinCellTests, isNewAlive_4);
+		FRIEND_TEST(FredkinCellTests, isNewAlive_5);
+		FRIEND_TEST(FredkinCellTests, isNewAlive_6);
+		FRIEND_TEST(FredkinCellTests, isNewAlive_7);
+		FRIEND_TEST(FredkinCellTests, clone_1);
+		FRIEND_TEST(FredkinCellTests, clone_3);
+		FRIEND_TEST(FredkinCellTests, clone_5);
+		FRIEND_TEST(FredkinCellTests, clone_6);
 	public:
 		AbstractCell(char v): value(v), newValue(-1){};
-		AbstractCell(const AbstractCell& rhs):value(rhs.value), newValue(rhs.newValue){};
 		virtual ~AbstractCell(){};
 		virtual void update(vector<AbstractCell*> neighbors) = 0;
 		virtual int isAlive() = 0;
@@ -132,7 +186,6 @@ class AbstractCell{
 class ConwayCell : public AbstractCell{
 	public:
 		ConwayCell(char v): AbstractCell(v) {};
-		ConwayCell(const ConwayCell& rhs):AbstractCell(rhs){};
 		void update(vector<AbstractCell*> neighbors);
 		int isAlive();
 		int isNewAlive() const;
@@ -142,9 +195,20 @@ class ConwayCell : public AbstractCell{
 class FredkinCell : public AbstractCell{
 	private:
 		int age;
+
+		FRIEND_TEST(FredkinCellTests, constructor_1);
+		FRIEND_TEST(FredkinCellTests, constructor_2);
+		FRIEND_TEST(FredkinCellTests, isAlive_5);
+		FRIEND_TEST(FredkinCellTests, isAlive_6);
+		FRIEND_TEST(FredkinCellTests, isNewAlive_5);
+		FRIEND_TEST(FredkinCellTests, isNewAlive_6);
+		FRIEND_TEST(FredkinCellTests, isNewAlive_7);
+		FRIEND_TEST(FredkinCellTests, clone_1);
+		FRIEND_TEST(FredkinCellTests, clone_3);
+		FRIEND_TEST(FredkinCellTests, clone_5);
+		FRIEND_TEST(FredkinCellTests, clone_6);
 	public:
 		FredkinCell(char v): AbstractCell(v), age(0) {};
-		FredkinCell(const FredkinCell& rhs):AbstractCell(rhs), age(rhs.age){};		
 		void update(vector<AbstractCell*> neighbors);
 		int isAlive();
 		int isNewAlive() const;

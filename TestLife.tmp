@@ -1,0 +1,160 @@
+==20954== Memcheck, a memory error detector
+==20954== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==20954== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==20954== Command: ./TestLife
+==20954== 
+Running main() from gtest_main.cc
+[==========] Running 61 tests from 2 test cases.
+[----------] Global test environment set-up.
+[----------] 24 tests from ConwayCellTests
+[ RUN      ] ConwayCellTests.constructor_1
+[       OK ] ConwayCellTests.constructor_1 (9 ms)
+[ RUN      ] ConwayCellTests.constructor_2
+[       OK ] ConwayCellTests.constructor_2 (2 ms)
+[ RUN      ] ConwayCellTests.update_1
+[       OK ] ConwayCellTests.update_1 (29 ms)
+[ RUN      ] ConwayCellTests.update_2
+[       OK ] ConwayCellTests.update_2 (7 ms)
+[ RUN      ] ConwayCellTests.update_3
+[       OK ] ConwayCellTests.update_3 (8 ms)
+[ RUN      ] ConwayCellTests.update_4
+[       OK ] ConwayCellTests.update_4 (7 ms)
+[ RUN      ] ConwayCellTests.update_5
+[       OK ] ConwayCellTests.update_5 (8 ms)
+[ RUN      ] ConwayCellTests.update_6
+[       OK ] ConwayCellTests.update_6 (7 ms)
+[ RUN      ] ConwayCellTests.update_7
+[       OK ] ConwayCellTests.update_7 (8 ms)
+[ RUN      ] ConwayCellTests.update_8
+[       OK ] ConwayCellTests.update_8 (8 ms)
+[ RUN      ] ConwayCellTests.update_9
+[       OK ] ConwayCellTests.update_9 (7 ms)
+[ RUN      ] ConwayCellTests.update_10
+[       OK ] ConwayCellTests.update_10 (8 ms)
+[ RUN      ] ConwayCellTests.isAlive_1
+[       OK ] ConwayCellTests.isAlive_1 (2 ms)
+[ RUN      ] ConwayCellTests.isAlive_2
+[       OK ] ConwayCellTests.isAlive_2 (2 ms)
+[ RUN      ] ConwayCellTests.isAlive_3
+[       OK ] ConwayCellTests.isAlive_3 (2 ms)
+[ RUN      ] ConwayCellTests.isAlive_4
+[       OK ] ConwayCellTests.isAlive_4 (3 ms)
+[ RUN      ] ConwayCellTests.isNewAlive_1
+[       OK ] ConwayCellTests.isNewAlive_1 (2 ms)
+[ RUN      ] ConwayCellTests.isNewAlive_2
+[       OK ] ConwayCellTests.isNewAlive_2 (2 ms)
+[ RUN      ] ConwayCellTests.isNewAlive_3
+[       OK ] ConwayCellTests.isNewAlive_3 (2 ms)
+[ RUN      ] ConwayCellTests.isNewAlive_4
+[       OK ] ConwayCellTests.isNewAlive_4 (2 ms)
+[ RUN      ] ConwayCellTests.clone_1
+[       OK ] ConwayCellTests.clone_1 (4 ms)
+[ RUN      ] ConwayCellTests.clone_2
+[       OK ] ConwayCellTests.clone_2 (4 ms)
+[ RUN      ] ConwayCellTests.clone_3
+[       OK ] ConwayCellTests.clone_3 (2 ms)
+[ RUN      ] ConwayCellTests.clone_4
+[       OK ] ConwayCellTests.clone_4 (3 ms)
+[----------] 24 tests from ConwayCellTests (147 ms total)
+
+[----------] 37 tests from FredkinCellTests
+[ RUN      ] FredkinCellTests.constructor_1
+[       OK ] FredkinCellTests.constructor_1 (3 ms)
+[ RUN      ] FredkinCellTests.constructor_2
+[       OK ] FredkinCellTests.constructor_2 (3 ms)
+[ RUN      ] FredkinCellTests.update_1
+[       OK ] FredkinCellTests.update_1 (9 ms)
+[ RUN      ] FredkinCellTests.update_2
+[       OK ] FredkinCellTests.update_2 (8 ms)
+[ RUN      ] FredkinCellTests.update_3
+[       OK ] FredkinCellTests.update_3 (7 ms)
+[ RUN      ] FredkinCellTests.update_4
+[       OK ] FredkinCellTests.update_4 (8 ms)
+[ RUN      ] FredkinCellTests.update_5
+[       OK ] FredkinCellTests.update_5 (7 ms)
+[ RUN      ] FredkinCellTests.update_6
+[       OK ] FredkinCellTests.update_6 (8 ms)
+[ RUN      ] FredkinCellTests.update_7
+[       OK ] FredkinCellTests.update_7 (7 ms)
+[ RUN      ] FredkinCellTests.update_8
+[       OK ] FredkinCellTests.update_8 (8 ms)
+[ RUN      ] FredkinCellTests.update_9
+[       OK ] FredkinCellTests.update_9 (7 ms)
+[ RUN      ] FredkinCellTests.update_10
+[       OK ] FredkinCellTests.update_10 (8 ms)
+[ RUN      ] FredkinCellTests.update_11
+[       OK ] FredkinCellTests.update_11 (7 ms)
+[ RUN      ] FredkinCellTests.update_12
+[       OK ] FredkinCellTests.update_12 (8 ms)
+[ RUN      ] FredkinCellTests.update_13
+[       OK ] FredkinCellTests.update_13 (7 ms)
+[ RUN      ] FredkinCellTests.update_14
+[       OK ] FredkinCellTests.update_14 (7 ms)
+[ RUN      ] FredkinCellTests.update_15
+[       OK ] FredkinCellTests.update_15 (12 ms)
+[ RUN      ] FredkinCellTests.update_16
+[       OK ] FredkinCellTests.update_16 (7 ms)
+[ RUN      ] FredkinCellTests.isAlive_1
+[       OK ] FredkinCellTests.isAlive_1 (2 ms)
+[ RUN      ] FredkinCellTests.isAlive_2
+[       OK ] FredkinCellTests.isAlive_2 (2 ms)
+[ RUN      ] FredkinCellTests.isAlive_3
+[       OK ] FredkinCellTests.isAlive_3 (2 ms)
+[ RUN      ] FredkinCellTests.isAlive_4
+[       OK ] FredkinCellTests.isAlive_4 (2 ms)
+[ RUN      ] FredkinCellTests.isAlive_5
+[       OK ] FredkinCellTests.isAlive_5 (2 ms)
+[ RUN      ] FredkinCellTests.isAlive_6
+[       OK ] FredkinCellTests.isAlive_6 (2 ms)
+[ RUN      ] FredkinCellTests.isNewAlive_1
+[       OK ] FredkinCellTests.isNewAlive_1 (2 ms)
+[ RUN      ] FredkinCellTests.isNewAlive_2
+[       OK ] FredkinCellTests.isNewAlive_2 (2 ms)
+[ RUN      ] FredkinCellTests.isNewAlive_3
+[       OK ] FredkinCellTests.isNewAlive_3 (2 ms)
+[ RUN      ] FredkinCellTests.isNewAlive_4
+[       OK ] FredkinCellTests.isNewAlive_4 (2 ms)
+[ RUN      ] FredkinCellTests.isNewAlive_5
+[       OK ] FredkinCellTests.isNewAlive_5 (2 ms)
+[ RUN      ] FredkinCellTests.isNewAlive_6
+[       OK ] FredkinCellTests.isNewAlive_6 (3 ms)
+[ RUN      ] FredkinCellTests.isNewAlive_7
+[       OK ] FredkinCellTests.isNewAlive_7 (2 ms)
+[ RUN      ] FredkinCellTests.clone_1
+[       OK ] FredkinCellTests.clone_1 (4 ms)
+[ RUN      ] FredkinCellTests.clone_2
+[       OK ] FredkinCellTests.clone_2 (3 ms)
+[ RUN      ] FredkinCellTests.clone_3
+[       OK ] FredkinCellTests.clone_3 (3 ms)
+[ RUN      ] FredkinCellTests.clone_4
+[       OK ] FredkinCellTests.clone_4 (3 ms)
+[ RUN      ] FredkinCellTests.clone_5
+[       OK ] FredkinCellTests.clone_5 (3 ms)
+[ RUN      ] FredkinCellTests.clone_6
+[       OK ] FredkinCellTests.clone_6 (3 ms)
+[----------] 37 tests from FredkinCellTests (179 ms total)
+
+[----------] Global test environment tear-down
+[==========] 61 tests from 2 test cases ran. (354 ms total)
+[  PASSED  ] 61 tests.
+==20954== 
+==20954== HEAP SUMMARY:
+==20954==     in use at exit: 0 bytes in 0 blocks
+==20954==   total heap usage: 1,311 allocs, 1,311 frees, 149,188 bytes allocated
+==20954== 
+==20954== All heap blocks were freed -- no leaks are possible
+==20954== 
+==20954== For counts of detected and suppressed errors, rerun with: -v
+==20954== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+File 'Life.c++'
+Lines executed:65.43% of 81
+Branches executed:80.00% of 70
+Taken at least once:68.57% of 70
+Calls executed:50.00% of 36
+Creating 'Life.c++.gcov'
+File 'TestLife.c++'
+Lines executed:99.47% of 759
+Branches executed:70.43% of 2976
+Taken at least once:35.22% of 2976
+Calls executed:55.79% of 3180
+Creating 'TestLife.c++.gcov'
