@@ -1311,3 +1311,207 @@ TEST(FredkinCellTests, clone_6) {
 	}
 	delete fc2;
 }
+
+// --------------
+// CellTests
+// --------------
+
+TEST(CellTests, constructor_1) {
+	Cell c('0');
+	ASSERT_EQ(c.value, '0');
+	ASSERT_NE(c.value, '-');
+}
+
+TEST(CellTests, constructor_2) {
+	Cell c('-');
+	ASSERT_EQ(c.value, '-');
+	ASSERT_NE(c.value, '0');
+}
+
+TEST(CellTests, constructor_3) {
+	Cell c('0');
+	ASSERT_EQ(c.cell->value, '0');
+	ASSERT_NE(c.cell->value, '-');
+}
+
+TEST(CellTests, constructor_4) {
+	Cell c('-');
+	ASSERT_EQ(c.cell->value, '-');
+	ASSERT_NE(c.cell->value, '0');
+}
+
+TEST(CellTests, isAlive_1) {
+	Cell c('0');
+	ASSERT_EQ(c.isAlive(), 1);
+}
+
+TEST(CellTests, isAlive_2) {
+	Cell c('-');
+	ASSERT_EQ(c.isAlive(), 0);
+}
+
+TEST(CellTests, isAlive_3) {
+	Cell c('0');
+	c.newValue = '-';
+	ASSERT_EQ(c.isAlive(), 1);
+}
+
+TEST(CellTests, isAlive_4) {
+	Cell c('-');
+	c.newValue = '0';
+	ASSERT_EQ(c.isAlive(), 0);
+}
+
+TEST(CellTests, isNewAlive_1) {
+	Cell c('0');
+	c.cell->newValue = '0';
+	ASSERT_EQ(c.isNewAlive(), 1);
+}
+
+TEST(CellTests, isNewAlive_2) {
+	Cell c('0');
+	c.cell->newValue = '-';
+	ASSERT_EQ(c.isNewAlive(), 0);
+}
+
+TEST(CellTests, isNewAlive_3) {
+	Cell c('-');
+	c.cell->newValue = '0';
+	ASSERT_EQ(c.isNewAlive(), 1);
+}
+
+TEST(CellTests, isNewAlive_4) {
+	Cell c('-');
+	c.cell->newValue = '-';
+	ASSERT_EQ(c.isNewAlive(), 0);
+}
+
+TEST(CellTests, clone_1) {
+	Cell c('-');
+	AbstractCell* c2 = c.clone();
+	ASSERT_EQ(c.value, c2->value);
+	ASSERT_EQ(c.newValue, c2->newValue);
+	delete c2;
+}
+
+TEST(CellTests, toNewValue_1) {
+	Cell c('-');
+	c.cell->newValue = '0';
+	c.toNewValue();
+	ASSERT_EQ(c.isAlive(), c.isNewAlive());
+}
+
+TEST(CellTests, copy_1) {
+	Cell c('-');
+	c.cell->newValue = '0';
+	Cell c2(c);
+	ASSERT_EQ(c.isNewAlive(), c2.isNewAlive());
+	ASSERT_EQ(c.value, c2.value);
+	ASSERT_EQ(c.newValue, c2.newValue);
+}
+
+TEST(CellTests, copy_2) {
+	Cell c('-');
+	c.cell->newValue = '0';
+	Cell c2(c);
+	c.value = 1;
+	ASSERT_EQ(c.isNewAlive(), c2.isNewAlive());
+	ASSERT_NE(c.value, c2.value);
+	ASSERT_EQ(c.newValue, c2.newValue);
+}
+
+TEST(CellTests, update_1) {
+	Cell c('-');
+	vector<AbstractCell*> neighbors;
+	Cell c1('-');
+	Cell c2('-');
+	Cell c3('-');
+	Cell c4('-');
+	Cell c5('-');
+	Cell c6('-');
+	Cell c7('-');
+	Cell c8('-');
+	neighbors.push_back(&c1);
+	neighbors.push_back(&c2);
+	neighbors.push_back(&c3);
+	neighbors.push_back(&c4);
+	neighbors.push_back(&c5);
+	neighbors.push_back(&c6);
+	neighbors.push_back(&c7);
+	neighbors.push_back(&c8);
+	c.update(neighbors);
+	ASSERT_EQ(c.cell->value, '-');
+	ASSERT_EQ(c.cell->newValue, '-');
+}
+
+TEST(CellTests, update_2) {
+	Cell c('-');
+	vector<AbstractCell*> neighbors;
+	Cell c1('-');
+	Cell c2('*');
+	Cell c3('-');
+	Cell c4('-');
+	Cell c5('-');
+	Cell c6('-');
+	Cell c7('-');
+	Cell c8('-');
+	neighbors.push_back(&c1);
+	neighbors.push_back(&c2);
+	neighbors.push_back(&c3);
+	neighbors.push_back(&c4);
+	neighbors.push_back(&c5);
+	neighbors.push_back(&c6);
+	neighbors.push_back(&c7);
+	neighbors.push_back(&c8);
+	c.update(neighbors);
+	ASSERT_EQ(c.cell->value, '-');
+	ASSERT_EQ(c.cell->newValue, '0');
+}
+
+TEST(CellTests, update_3) {
+	Cell c('0');
+	vector<AbstractCell*> neighbors;
+	Cell c1('-');
+	Cell c2('*');
+	Cell c3('-');
+	Cell c4('-');
+	Cell c5('-');
+	Cell c6('-');
+	Cell c7('-');
+	Cell c8('-');
+	neighbors.push_back(&c1);
+	neighbors.push_back(&c2);
+	neighbors.push_back(&c3);
+	neighbors.push_back(&c4);
+	neighbors.push_back(&c5);
+	neighbors.push_back(&c6);
+	neighbors.push_back(&c7);
+	neighbors.push_back(&c8);
+	c.update(neighbors);
+	ASSERT_EQ(c.cell->value, '0');
+	ASSERT_EQ(c.newValue, '1');
+}
+
+TEST(CellTests, update_4) {
+	Cell c('0');
+	vector<AbstractCell*> neighbors;
+	Cell c1('-');
+	Cell c2('*');
+	Cell c3('-');
+	Cell c4('-');
+	Cell c5('-');
+	Cell c6('-');
+	Cell c7('-');
+	Cell c8('-');
+	neighbors.push_back(&c1);
+	neighbors.push_back(&c2);
+	neighbors.push_back(&c3);
+	neighbors.push_back(&c4);
+	neighbors.push_back(&c5);
+	neighbors.push_back(&c6);
+	neighbors.push_back(&c7);
+	neighbors.push_back(&c8);
+	c.update(neighbors);
+	c.update(neighbors);
+	ASSERT_EQ(c.newValue, '*');
+}

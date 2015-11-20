@@ -232,6 +232,7 @@ class AbstractCell{
 		FRIEND_TEST(FredkinCellTests, isNewAlive_5);
 		FRIEND_TEST(FredkinCellTests, isNewAlive_6);
 		FRIEND_TEST(FredkinCellTests, isNewAlive_7);
+
 		FRIEND_TEST(FredkinCellTests, clone_1);
 		FRIEND_TEST(FredkinCellTests, clone_3);
 		FRIEND_TEST(FredkinCellTests, clone_5);
@@ -241,6 +242,24 @@ class AbstractCell{
 		FRIEND_TEST(AbstractCellTests, print_1);
 		FRIEND_TEST(AbstractCellTests, print_2);
 
+		FRIEND_TEST(CellTests, constructor_1);
+		FRIEND_TEST(CellTests, constructor_2);
+		FRIEND_TEST(CellTests, constructor_3);
+		FRIEND_TEST(CellTests, constructor_4);
+		FRIEND_TEST(CellTests, isAlive_3);
+		FRIEND_TEST(CellTests, isAlive_4);
+		FRIEND_TEST(CellTests, isNewAlive_1);
+		FRIEND_TEST(CellTests, isNewAlive_2);
+		FRIEND_TEST(CellTests, isNewAlive_3);
+		FRIEND_TEST(CellTests, isNewAlive_4);
+		FRIEND_TEST(CellTests, clone_1);
+		FRIEND_TEST(CellTests, toNewValue_1);
+		FRIEND_TEST(CellTests, copy_1);
+		FRIEND_TEST(CellTests, copy_2);
+		FRIEND_TEST(CellTests, update_1);
+		FRIEND_TEST(CellTests, update_2);
+		FRIEND_TEST(CellTests, update_3);
+		FRIEND_TEST(CellTests, update_4);
 	public:
 		AbstractCell(char v): value(v), newValue(-1){};
 		virtual ~AbstractCell(){};
@@ -287,6 +306,21 @@ class FredkinCell : public AbstractCell{
 class Cell : public AbstractCell{
 	private:
 		AbstractCell* cell;
+
+		FRIEND_TEST(CellTests, constructor_3);
+		FRIEND_TEST(CellTests, constructor_4);
+		FRIEND_TEST(CellTests, isNewAlive_1);
+		FRIEND_TEST(CellTests, isNewAlive_2);
+		FRIEND_TEST(CellTests, isNewAlive_3);
+		FRIEND_TEST(CellTests, isNewAlive_4);
+		FRIEND_TEST(CellTests, clone_1);
+		FRIEND_TEST(CellTests, toNewValue_1);
+		FRIEND_TEST(CellTests, copy_1);
+		FRIEND_TEST(CellTests, copy_2);
+		FRIEND_TEST(CellTests, update_1);
+		FRIEND_TEST(CellTests, update_2);
+		FRIEND_TEST(CellTests, update_3);
+		FRIEND_TEST(CellTests, update_4);
 	public:
 		Cell(char v): AbstractCell(v){
 			cell = new FredkinCell(v);
