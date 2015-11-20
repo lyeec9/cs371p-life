@@ -1,9 +1,9 @@
-/** @file TestDarwin.c++
- *  @brief The file containing the unit tests for methods in Darwin.h
+/** @file TestLife.c++
+ *  @brief The file containing the unit tests for methods in Life.h
  */
 
 // ------------------------------------
-// projects/darwin/TestDarwin.c++
+// projects/life/TestLife.c++
 // Copyright (C) 2015
 // Glenn P. Downing
 // ------------------------------------

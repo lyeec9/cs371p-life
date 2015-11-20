@@ -1,5 +1,5 @@
-/* @file RunDarwin.c++
-* @brief The file that simulates the 4 desired boards
+/* @file RunLife.c++
+* @brief The file that reads input and runs Life
 */
 
 #include <cassert>   // assert
@@ -14,6 +14,9 @@
 // main
 // ----
 
+/**
+ * The main method. Reads input and runs Life.
+ */
 int main () {
   using namespace std;
   string line;
@@ -28,34 +31,9 @@ int main () {
     getline(cin,line);
     int outputFreq = stoi(line);
 
-    //cout << "cell type \"" + cellType + "\""<<endl;
-    //cout << "compare with fredkin cell" + to_string(cellType.compare("FredkinCell") ) << endl;
-    //cout << "rows" + to_string(rows) <<endl;
-    //cout << "cols" + to_string(cols) <<endl;
-    //cout << "steps" + to_string(steps) <<endl;
-    //cout << "outputFreq" + to_string(outputFreq) <<endl;
 
     cout << "*** Life<" << cellType << "> " << rows << "x" << cols << " ***" << endl;
     cout << endl;
-
-    /*fix scope problem
-    if(strcmp(cellType, "FredkinCell"))
-    Life<FredkinCell> life(cols, rows);
-    else if(strcmp(cellType, "ConwayCell"))
-    Life<ConwayCell> life(cols, rows);
-    else
-    Life<T> life(cols, rows);
-
-
-    for(int r = 0; r < rows; r++){
-    getline(cin, line);
-    if(strcmp(cellType, "fredkinCell"))
-
-    else if(strcmp(cellType, "ConwayCell"))
-
-    }
-
-    */
 
     if(cellType.compare( "FredkinCell") == 0){
       Life<FredkinCell> life(cols, rows);

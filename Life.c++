@@ -1,5 +1,5 @@
-/** @file Darwin.c++
- *  @brief The main file containing the Species, Creature and Darwin classes
+/** @file Life.c++
+ *  @brief The main file containing the ConwayCell, FredkinCell, and AbstractCell implementations
  */
 
 

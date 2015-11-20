@@ -1,5 +1,5 @@
-/* @file Darwin.h
- * @brief The header file defining all of the methods used in Darwin.c++
+/* @file Life.h
+ * @brief The header file defining all of the methods used in Life.c++
  */
 
 #ifndef Life_h
