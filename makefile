@@ -1,9 +1,9 @@
 FILES :=                              \
     .travis.yml                       \
-    Life-tests/lyc255-RunLife.in   \
-    Life-tests/lyc255-RunLife.out  \
-    Life-tests/lyc255-TestLife.c++ \
-    Life-tests/lyc255-TestLife.out \
+    life-tests/lyc255-RunLife.in   \
+    life-tests/lyc255-RunLife.out  \
+    life-tests/lyc255-TestLife.c++ \
+    life-tests/lyc255-TestLife.out \
     Life.c++                       \
     Life.h                         \
     Life.log                       \
