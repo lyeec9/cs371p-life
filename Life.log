@@ -1,0 +1,140 @@
+commit 7506bb73041d3bedb301fb773934d4b0bdb0d104
+Merge: 5705012 529aaaa
+Author: lyee <lyeec9@gmail.com>
+Date:   Thu Nov 19 20:06:58 2015 -0600
+
+    Merged final changes
+
+commit 57050124e0fa9bddd05788a6fefc2e9328c78b96
+Author: lyee <lyeec9@gmail.com>
+Date:   Thu Nov 19 20:05:32 2015 -0600
+
+    Fixed additional documentation and the makefile
+
+commit 529aaaa547d45c4c39eef50bb73a287d762fe5ab
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Thu Nov 19 20:05:06 2015 -0600
+
+    fixed makefile. renamed pdf. created TestLife.out
+
+commit 5f09c0f99d0845222a6c6b4de5f7b8f2a7441d3a
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Thu Nov 19 19:57:31 2015 -0600
+
+    Closes #16
+
+commit 370b999873ca1e41f1c474e5b6219cfccbd795a8
+Author: lyee <lyeec9@gmail.com>
+Date:   Thu Nov 19 19:55:22 2015 -0600
+
+    Fixed documentation
+
+commit 3b1ee20dddfc4180896552c7b6d77db0b30060bf
+Author: lyee <lyeec9@gmail.com>
+Date:   Thu Nov 19 19:53:11 2015 -0600
+
+    Added documentation. Fixes #14
+
+commit ba3b43245cd0e26189acdd02535b6023703b27ac
+Merge: 19d39ee 1d43dc0
+Author: lyee <lyeec9@gmail.com>
+Date:   Thu Nov 19 19:24:32 2015 -0600
+
+    Merged additional test cases
+
+commit 19d39eeddbee9c048b2648843704b29eb632bcbf
+Author: lyee <lyeec9@gmail.com>
+Date:   Thu Nov 19 19:22:19 2015 -0600
+
+    Merged test files
+
+commit 1d43dc0f99f01dab1f78ff4f406063b9f93dc8a8
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Thu Nov 19 19:18:26 2015 -0600
+
+    Closes #9.
+    Fixed memory leaks
+
+commit 93fde7e145cecdcb698d9d2a976f8c93926afeff
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Thu Nov 19 18:28:43 2015 -0600
+
+    Closes #10. Closes #11
+
+commit d3211358f6f13531116ad80d7ecf53f95c951fdb
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Thu Nov 19 16:49:28 2015 -0600
+
+    cleaned up output
+
+commit 1de5e3cec0415f2ec96ff22b55b09f7056d81742
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Wed Nov 18 21:57:53 2015 -0600
+
+    Fixed newValue bug
+
+commit 65ff6daee6a2665ab704fdc5965d77017eb89403
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Wed Nov 18 21:27:32 2015 -0600
+
+    fixed newValue
+
+commit 43204ad5e0ee24ac5232f0826dfaf9f9ec33cf8c
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Wed Nov 18 20:38:14 2015 -0600
+
+    fixed test file
+
+commit c0a7686ef600b93fd7e4e3bff6b494a4e85db34b
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Wed Nov 18 20:02:38 2015 -0600
+
+    fixed makefile, added destructors. fixed clone. added proper copy constructor semantics for cell.
+
+commit a82d0b50b38cd1d31591f3507ce4f0e3ecc661ec
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Wed Nov 18 19:37:37 2015 -0600
+
+    fixed Travis file
+
+commit a8cc713043cfc47d9fdf0c7afc777302476dc28c
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Wed Nov 18 19:32:46 2015 -0600
+
+    Closes #5. Closes #7.
+
+commit 152a94d651f4634b73834658e4d84a097aa7cde7
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Tue Nov 17 22:56:19 2015 -0600
+
+    Closes #6. Closes #8. Fixes iteration bug in RunLife, logic in ConwayCell, and segfault in Life.
+
+commit 5d62bb0584648f9e2bf9084e7dabaf5bf6abe8f4
+Author: lyee <lyeec9@gmail.com>
+Date:   Tue Nov 17 17:42:21 2015 -0600
+
+    Debugging code. Added age and wrote update() for FredkinCell and ConwayCell and isEqual() for AbstractCell.
+
+commit 0518e701e7ffd9ee056ad19566b864d1ff18c7c3
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Mon Nov 16 22:44:36 2015 -0600
+
+    Closes #17. Closes #18.
+
+commit 7aa7037782c1f7696d4040f1c6a7238f0b30f9f5
+Author: lyee <lyeec9@gmail.com>
+Date:   Mon Nov 16 21:50:58 2015 -0600
+
+    Added main in RunLife.c++ to read the files. Thsi fixes #19.
+
+commit e74372d8a48c9fc9b65c8e96fba239f4477db1a3
+Author: Brian Shiau <brian@cs.utexas.edu>
+Date:   Mon Nov 16 19:33:47 2015 -0600
+
+    Closes #4
+
+commit 5e9327cf564d6277e83d1ca4a537631e3a438efb
+Author: lyee <lyeec9@gmail.com>
+Date:   Mon Nov 16 18:25:15 2015 -0600
+
+    Created initial files. This fixes #1. This fixes #2. This fixes #3.
